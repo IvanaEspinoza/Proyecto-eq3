@@ -5,7 +5,7 @@ def leer_datos():
     #Algo mal
 
 def max_min():
-    n=int(input('¿Cuántos países quiere ver? (El número mencionado será igual para ambas categorías)'))
+    n=int(input('¿Cuántos países quiere ver? (El número mencionado será igual para ambas categorías): '))
 
 
     
@@ -16,7 +16,8 @@ def main():
     ejecutar = input('''Seleccione una opción: 
     1. Países con mayor y menor población vacunada.
     2. Países que administraron vacunas la mayor cantidad y menor cantidad de días
-    3. Gráfico de comparación entre población completamente vacunada y el PIB del país''')
+    3. Gráfico de comparación entre población completamente vacunada y el PIB del país
+    Su opción es: ''')
 
     if ejecutar == '1':
         max_min()
