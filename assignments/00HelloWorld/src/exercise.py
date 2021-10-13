@@ -1,9 +1,15 @@
-def formar_matriz():
+def leer_datos():
+    with open('/workspace/Proyecto-eq3/assignments/Global_COVID_Vaccination_Tracker.csv', 'r') as f:  
+        for line in f:
+            lista_line_gcv = line.split(",")
+    #Algo mal
 
 def max_min():
-    n=input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)?')
+    n=int(input('¿Cuántos países quiere ver? (El número mencionado será igual para ambas categorías)'))
+
+
     
-def graficar():
+#def graficar():
 
 def main():
     #escribe tu código abajo de esta línea
@@ -20,6 +26,7 @@ def main():
         graficar()
     else:
         print('Entrada inválida')
+    
 
 if __name__=='__main__':
     main()
