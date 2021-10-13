@@ -16,6 +16,10 @@ def leer_datos():
             porcen_vacunacion.append(lista_line[3])
             porcen_vacunacion_comple.append(lista_line[4])
             num_vacunas_día.append(lista_line[5])
+            
+#def formar_matriz():
+
+        
 
 
 def max_min():
