@@ -1,6 +1,19 @@
+def formar_matriz():
+
+def max():
+
+def min():
+    
 def main():
     #escribe tu código abajo de esta línea
-    pass
+    ejecutar = input('''Seleccione una opción: 
+    1. Países con mayor y menor población vacunada.
+    2. Países que administraron vacunas la mayor cantidad y menor cantidad de días
+    3. Gráfico de comparación entre población completamente vacunada y el PIB del país''')
+
+    if ejecutar == '1':
+        n=input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)?')
+        
 
 if __name__=='__main__':
     main()
