@@ -1,31 +1,134 @@
+#def mostrar_datos():
+
+def manipular_datos1(lista1,lista2):
+    dias = []
+    for i in range (len(lista1)):
+        dato_dias = lista1[i]/lista2[i]
+        dias.append(dato_dias)
+    return dias
+
+def manipular_datos2(lista1,lista2):
+    vacuna_no_comple=[]
+    for i in range (len(lista1)):
+        no_completo=lista1[i]-lista2[i]
+        vacuna_no_comple.append(no_completo)
+    return vacuna_no_comple
+
+def formar_matriz(lista1,lista2,lista3,lista4,lista5):
+    matriz=[]
+    for i in range(len(lista1)):
+        lista_pais=[lista1[i], lista2[i], lista3[i], lista4[i], lista5[i]]
+        matriz.append(lista_pais)
+    return matriz
+
 def leer_datos():
     paises=[]
     num_vacunas=[]
-    num_vacunas_poblacion=[]
-    porcen_vacunacion=[]
-    porcen_vacunacion_comple=[]
-    num_vacunas_día=[]
+    porcen_vacuna=[]
+    porcen_vacuna_comple=[]
+    num_vacuna_día=[]
 
     with open('/workspace/Proyecto-eq3/assignments/Global_COVID_Vaccination_Tracker.csv', 'r') as f:  
         for line in f:
-            lista_line= line.split(",")
-
+            lista_line = line.split(",")
             paises.append(lista_line[0])
-            num_vacunas.append(lista_line[1])
-            num_vacunas_poblacion.append(lista_line[2])
-            porcen_vacunacion.append(lista_line[3])
-            porcen_vacunacion_comple.append(lista_line[4])
+            num_vacuna.append(lista_line[1])
+            porcen_vacuna.append(lista_line[3])
+            porcen_vacuna_comple.append(lista_line[4])
             num_vacunas_día.append(lista_line[5])
-            
-#def formar_matriz():
 
+    gdp_imf=[]
+
+    with open('/workspace/Proyecto-eq3/assignments/GDP_PerCapita.csv', 'r') as f:  
+        for line in f:
+            lista_line_gdp = line.split(",")
+            gdp_imf.append(lista_line_gdp[3])
         
+    dias = manipular_datos1(num_vacunas,num_vacuna_día)
+    vacuna_no_comple = manipular_datos2(porcen_vacuna,porcen_vacuna_comple)
 
+    matriz_informe1 = formar_matriz(paises,porcen_vacuna,porcen_vacuna_comple,vacuna_no_comple,gdp_imf) 
+    matriz_informe2 = formar_matriz(paises,num_vacunas,num_vacuna_día,dias,gdp_imf)
 
-def max_min():
-    n=int(input('¿Cuántos países quiere ver? (El número mencionado será igual para ambas categorías): '))
+    return matriz_informe1, matriz_informe2, paises, porcen_vacuna_comple
 
+def formar_lista(lista,matriz,i,ind):
+    rang = len(matriz[i])-1
+    for nuevo in range (1,rang):
+        lista.append(matriz[i][ind+nuevo])
 
+def listas(matriz,lista_nueva,index):
+    for i in range (len(matriz)):
+        lista_nueva.append(matriz[i][index])
+    return lista_nueva 
+
+def maximo(n,matriz):
+    encabezado = []
+    lista1 = []
+    lista2 = []
+    lista3 = []
+    lista4 = []
+
+    desglose(matriz,encabezado,0)
+    desglose(matriz,lista1,1)
+    desglose(matriz,lista2,2)
+    desglose(matriz,lista3,3)
+    desglose(matriz,lista4,4)
+    
+    encabezado_max=[]
+    lista1_max = []
+    lista2_max = []
+    lista3_max = []
+    lista4_max = []
+
+    for maxi in range (n):
+        maximo = max(n1)
+        lista1_max.append(maximo)
+        for i in range (len(matriz)):
+            if maximo in matriz[i]:
+                ind = matriz[i].index(maximo)
+                encabezado_max.append(matriz[i][ind-1])
+                formar_lista(lista2_max,matriz,i,ind)
+                formar_lista(lista3_max,matriz,i,ind)
+                formar_lista(lista4_max,matriz,i,ind)
+        lista1.remove(maximo)
+
+    matriz_max = formar_matriz(encabezado_max,lista1_max,lista2_max,lista3_max,lista4_max)
+    return matriz_max
+
+def minimo(n,matriz):
+    encabezado = []
+    lista1 = []
+    lista2 = []
+    lista3 = []
+    lista4 = []
+
+    desglose(matriz,encabezado,0)
+    desglose(matriz,lista1,1)
+    desglose(matriz,lista2,2)
+    desglose(matriz,lista3,3)
+    desglose(matriz,lista4,4)
+    
+    encabezado_min = []
+    lista1_min = []
+    lista2_min = []
+    lista3_min = []
+    lista4_min = []
+
+    for mini in range (n):
+        minimo = max(n1)
+        lista1_min.append(minimo)
+        for i in range (len(matriz)):
+            if minimo in matriz[i]:
+                ind = matriz[i].index(minimo)
+                encabezado_min.append(matriz[i][ind-1])
+                formar_lista(lista2_min,matriz,i,ind)
+                formar_lista(lista3_min,matriz,i,ind)
+                formar_lista(lista4_min,matriz,i,ind)
+        lista1.remove(minimo)
+
+    matriz_min = formar_matriz(encabezado_min,lista1_min,lista2_min,lista3_min,lista4_min)
+    return matriz_min
     
 #def graficar():
 
@@ -34,15 +137,26 @@ def main():
     ejecutar = input('''Seleccione una opción: 
     1. Países con mayor y menor población vacunada.
     2. Países que administraron vacunas la mayor cantidad y menor cantidad de días
-    3. Gráfico de comparación entre población completamente vacunada y el PIB del país
+    3. Gráfico de comparación entre los países con mayor y menor población vacunada por completo
     Su opción es: ''')
 
+    n = input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)?')
+    matrices_listas = leer_datos()
+
     if ejecutar == '1':
-        max_min()
+        matriz_informe1 = matrices_listas[0]
+        maximo(n,matriz_informe1)
+        minimo(n,matriz_informe1)
+
     elif ejecutar == '2':
-        max_min()
+        matriz_informe2 = matrices_listas[1]        
+        maximo(n,matriz_informe2)
+        minimo(n,matriz_informe2)
+
     elif ejecutar == '3':
-        graficar()
+        paises = matrices_listas[2]
+        vacuna_comple = matrices[3]
+        graficar(paises,vacuna_comple)
     else:
         print('Entrada inválida')
     
