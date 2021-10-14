@@ -3,14 +3,14 @@
 def manipular_datos1(lista1,lista2):
     dias = []
     for i in range (len(lista1)):
-        dato_dias = lista1[i]/lista2[i]
+        dato_dias = str(int(lista1[i]) / int(lista2[i]))
         dias.append(dato_dias)
     return dias
 
 def manipular_datos2(lista1,lista2):
     vacuna_no_comple=[]
     for i in range (len(lista1)):
-        no_completo=lista1[i]-lista2[i]
+        no_completo=str(int(lista1[i])-int(lista2[i]))
         vacuna_no_comple.append(no_completo)
     return vacuna_no_comple
 
@@ -31,6 +31,7 @@ def leer_datos():
     with open('/workspace/Proyecto-eq3/assignments/Global_COVID_Vaccination_Tracker.csv', 'r') as f:  
         for line in f:
             lista_line = line.split(",")
+
             paises.append(lista_line[0])
             num_vacuna.append(lista_line[1])
             porcen_vacuna.append(lista_line[3])
@@ -139,8 +140,7 @@ def main():
     2. Países que administraron vacunas la mayor cantidad y menor cantidad de días
     3. Gráfico de comparación entre los países con mayor y menor población vacunada por completo
     Su opción es: ''')
-
-    n = input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)?')
+    n = input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)? ')
     matrices_listas = leer_datos()
 
     if ejecutar == '1':
