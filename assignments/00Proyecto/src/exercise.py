@@ -15,9 +15,9 @@ def manipular_datos2(lista1,lista2):
     return vacuna_no_comple
 
 def formar_matriz(lista1,lista2,lista3,lista4,lista5):
-    matriz=[]
-    for i in range(len(lista1)):
-        lista_pais=[lista1[i], lista2[i], lista3[i], lista4[i], lista5[i]]
+    matriz = []
+    for i in range (len(lista1)):
+        lista_pais = [lista1[i], lista2[i], lista3[i], lista4[i], lista5[i]]
         matriz.append(lista_pais)
     return matriz
 
