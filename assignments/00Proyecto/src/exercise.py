@@ -1,4 +1,15 @@
-# def mostrar_datos():
+def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
+    print(f'Ordenados en forma descendente los {n} países con la mayor {definicion}:')
+    for i in range (n):
+        print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]} {simbolo} y un GDP de {matriz_max[i][4]}.
+        Otros datos: La {definicion} {palabra} es {matriz_max[i][2]} {simbolo}. 
+        Por lo tanto {matriz_max[i][3]} {palabras}''')
+
+    print(f'Ordenados en forma ascendente los {n} países con la menor {definicion}:')
+    for i in range (n):
+        print(f'''{i+1}. {matriz_min[i][0]} con {matriz_min[i][1]} {simbolo} y un GDP de {matriz_min[i][4]}.
+        Otros datos: La {definicion} {palabra} es {matriz_min[i][2]} {simbolo}. 
+        Por lo tanto {matriz_min[i][3]} {palabras}''')
 
 def manipular_datos1(lista1,lista2):
     dias = []
@@ -53,11 +64,6 @@ def leer_datos():
 
     return matriz_informe1, matriz_informe2, paises, porcen_vacuna_comple
 
-def formar_lista(lista,matriz,i,ind):
-    rang = len(matriz[i])-1
-    for nuevo in range (1,rang):
-        lista.append(matriz[i][ind+nuevo])
-
 def desglose(matriz,lista_nueva,index):
     for i in range (len(matriz)):
         lista_nueva.append(matriz[i][index])
@@ -83,15 +89,14 @@ def maximo(n,matriz):
     lista4_max = []
 
     for maxi in range (n):
-        maximo = max(n1)
+        maximo = max(lista1)
         lista1_max.append(maximo)
         for i in range (len(matriz)):
-            if maximo in matriz[i]:
-                ind = matriz[i].index(maximo)
-                lista0_max.append(matriz[i][ind-1])
-                formar_lista(lista2_max,matriz,i,ind)
-                formar_lista(lista3_max,matriz,i,ind)
-                formar_lista(lista4_max,matriz,i,ind)
+            if maximo in matriz[i] and maximo in matriz[i][1]:
+                lista0_max.append(matriz[i][0])
+                lista2_max.append(matriz[i][2])
+                lista3_max.append(matriz[i][3])
+                lista4_max.append(matriz[i][4])
         lista1.remove(maximo)
 
     matriz_max = formar_matriz(lista0_max,lista1_max,lista2_max,lista3_max,lista4_max)
@@ -117,49 +122,57 @@ def minimo(n,matriz):
     lista4_min = []
 
     for mini in range (n):
-        minimo = max(n1)
+        minimo = min(lista1)
         lista1_min.append(minimo)
         for i in range (len(matriz)):
-            if minimo in matriz[i]:
-                ind = matriz[i].index(minimo)
-                lista0_min.append(matriz[i][ind-1])
-                formar_lista(lista2_min,matriz,i,ind)
-                formar_lista(lista3_min,matriz,i,ind)
-                formar_lista(lista4_min,matriz,i,ind)
+            if minimo in matriz[i] and minimo in matriz[i][1]:
+                lista0_min.append(matriz[i][0])
+                lista2_min.append(matriz[i][2])
+                lista3_min.append(matriz[i][3])
+                lista4_min.append(matriz[i][4])
         lista1.remove(minimo)
 
     matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
     return matriz_min
     
-#def graficar():
+# def graficar(lista1,lista2):
 
 def main():
     #escribe tu código abajo de esta línea
     ejecutar = input('''Seleccione una opción: 
     1. Países con mayor y menor población vacunada.
     2. Países que administraron la mayor y menor cantidad de vacunas.
-    3. Gráfico de comparación entre los países con mayor y menor población vacunada por completo
+    3. Gráfico de comparación entre los países con mayor y menor población vacunada por completo.
     Su opción es: ''')
-    n = input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)? ')
+    n = int(input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)? '))
     matrices_listas = leer_datos()
 
     if ejecutar == '1':
         matriz_informe1 = matrices_listas[0]
-        matriz_max = maximo(n,matriz_informe1)
-        matriz_min = minimo(n,matriz_informe1)
+        matriz_max1 = maximo(n,matriz_informe1)
+        matriz_min1 = minimo(n,matriz_informe1)
+        definicion1 = 'poblacion vacunada'
+        simbolo1 = '%'
+        palabra1 = 'por completo'
+        palabras1 = '% no se le han administrado todas las dosis.'
+        mostrar_datos(matriz_max1,matriz_min1,n,definicion1,simbolo1,palabra1,palabras1)
 
     elif ejecutar == '2':
         matriz_informe2 = matrices_listas[1]        
-        matriz_max = maximo(n,matriz_informe2)
-        matriz_min = minimo(n,matriz_informe2)
+        matriz_max2 = maximo(n,matriz_informe2)
+        matriz_min2 = minimo(n,matriz_informe2)
+        definicion2 = 'cantidad de vacunas administradas'
+        simbolo2 = 'dosis'
+        palabra2 = 'por día'
+        palabras2 = 'días tomó administrar tal cantidad de vacunas.'
+        mostrar_datos(matriz_max2,matriz_min2,n,definicion2,simbolo2,palabra2,palabras2)
 
     elif ejecutar == '3':
         paises = matrices_listas[2]
-        vacuna_comple = matrices[3]
+        vacuna_comple = matrices_listas[3]
         graficar(paises,vacuna_comple)
     else:
         print('Entrada inválida')
     
-
 if __name__=='__main__':
     main()
