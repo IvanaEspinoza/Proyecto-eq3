@@ -137,7 +137,7 @@ def main():
     #escribe tu código abajo de esta línea
     ejecutar = input('''Seleccione una opción: 
     1. Países con mayor y menor población vacunada.
-    2. Países que administraron vacunas la mayor cantidad y menor cantidad de días
+    2. Países que administraron la mayor y menor cantidad de vacunas.
     3. Gráfico de comparación entre los países con mayor y menor población vacunada por completo
     Su opción es: ''')
     n = input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)? ')
