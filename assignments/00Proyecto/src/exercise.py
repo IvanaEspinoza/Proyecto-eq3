@@ -1,4 +1,4 @@
-#def mostrar_datos():
+# def mostrar_datos():
 
 def manipular_datos1(lista1,lista2):
     dias = []
@@ -58,25 +58,25 @@ def formar_lista(lista,matriz,i,ind):
     for nuevo in range (1,rang):
         lista.append(matriz[i][ind+nuevo])
 
-def listas(matriz,lista_nueva,index):
+def desglose(matriz,lista_nueva,index):
     for i in range (len(matriz)):
         lista_nueva.append(matriz[i][index])
     return lista_nueva 
 
 def maximo(n,matriz):
-    encabezado = []
+    lista0 = []
     lista1 = []
     lista2 = []
     lista3 = []
     lista4 = []
 
-    desglose(matriz,encabezado,0)
+    desglose(matriz,lista0,0)
     desglose(matriz,lista1,1)
     desglose(matriz,lista2,2)
     desglose(matriz,lista3,3)
     desglose(matriz,lista4,4)
     
-    encabezado_max=[]
+    lista0_max = []
     lista1_max = []
     lista2_max = []
     lista3_max = []
@@ -88,29 +88,29 @@ def maximo(n,matriz):
         for i in range (len(matriz)):
             if maximo in matriz[i]:
                 ind = matriz[i].index(maximo)
-                encabezado_max.append(matriz[i][ind-1])
+                lista0_max.append(matriz[i][ind-1])
                 formar_lista(lista2_max,matriz,i,ind)
                 formar_lista(lista3_max,matriz,i,ind)
                 formar_lista(lista4_max,matriz,i,ind)
         lista1.remove(maximo)
 
-    matriz_max = formar_matriz(encabezado_max,lista1_max,lista2_max,lista3_max,lista4_max)
+    matriz_max = formar_matriz(lista0_max,lista1_max,lista2_max,lista3_max,lista4_max)
     return matriz_max
 
 def minimo(n,matriz):
-    encabezado = []
+    lista0 = []
     lista1 = []
     lista2 = []
     lista3 = []
     lista4 = []
 
-    desglose(matriz,encabezado,0)
+    desglose(matriz,lista0,0)
     desglose(matriz,lista1,1)
     desglose(matriz,lista2,2)
     desglose(matriz,lista3,3)
     desglose(matriz,lista4,4)
     
-    encabezado_min = []
+    lista0_min = []
     lista1_min = []
     lista2_min = []
     lista3_min = []
@@ -122,13 +122,13 @@ def minimo(n,matriz):
         for i in range (len(matriz)):
             if minimo in matriz[i]:
                 ind = matriz[i].index(minimo)
-                encabezado_min.append(matriz[i][ind-1])
+                lista0_min.append(matriz[i][ind-1])
                 formar_lista(lista2_min,matriz,i,ind)
                 formar_lista(lista3_min,matriz,i,ind)
                 formar_lista(lista4_min,matriz,i,ind)
         lista1.remove(minimo)
 
-    matriz_min = formar_matriz(encabezado_min,lista1_min,lista2_min,lista3_min,lista4_min)
+    matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
     return matriz_min
     
 #def graficar():
@@ -145,13 +145,13 @@ def main():
 
     if ejecutar == '1':
         matriz_informe1 = matrices_listas[0]
-        maximo(n,matriz_informe1)
-        minimo(n,matriz_informe1)
+        matriz_max = maximo(n,matriz_informe1)
+        matriz_min = minimo(n,matriz_informe1)
 
     elif ejecutar == '2':
         matriz_informe2 = matrices_listas[1]        
-        maximo(n,matriz_informe2)
-        minimo(n,matriz_informe2)
+        matriz_max = maximo(n,matriz_informe2)
+        matriz_min = minimo(n,matriz_informe2)
 
     elif ejecutar == '3':
         paises = matrices_listas[2]
