@@ -62,7 +62,7 @@ def leer_datos():
     matriz_informe1 = formar_matriz(paises,porcen_vacuna,porcen_vacuna_comple,vacuna_no_comple,gdp_imf) 
     matriz_informe2 = formar_matriz(paises,num_vacunas,num_vacuna_día,dias,gdp_imf)
 
-    return matriz_informe1, matriz_informe2, paises, porcen_vacuna_comple
+    return matriz_informe1, matriz_informe2
 
 def desglose(matriz,lista_nueva,index):
     for i in range (len(matriz)):
@@ -133,16 +133,65 @@ def minimo(n,matriz):
         lista1.remove(minimo)
 
     matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
-    return matriz_min
+    return matriz_min   
 
+def maximo_graficar(n,matriz):
+    lista0 = []
+    lista1 = []
+    lista2 = []
+    lista3 = []
+    lista4 = []
 
-    lista_min = []
+    desglose(matriz,lista0,0)
+    desglose(matriz,lista1,1)
+    desglose(matriz,lista2,2)
+    desglose(matriz,lista3,3)
+    desglose(matriz,lista4,4)
+    
+    lista0_max = []
+    lista1_max = []
+    lista2_max = []
+    lista3_max = []
+    lista4_max = []
+
+    for maxi in range (n):
+        maximo = max(lista2)
+        lista2_max.append(maximo)
+        for i in range (len(matriz)):
+            if maximo in matriz[i] and maximo in matriz[i][2]:
+                lista0_max.append(matriz[i][0])
+        lista2.remove(maximo)
+
+    return lista0_max, lista2_max
+
+def minimo_graficar(n,matriz):
+    lista0 = []
+    lista1 = []
+    lista2 = []
+    lista3 = []
+    lista4 = []
+
+    desglose(matriz,lista0,0)
+    desglose(matriz,lista1,1)
+    desglose(matriz,lista2,2)
+    desglose(matriz,lista3,3)
+    desglose(matriz,lista4,4)
+    
+    lista0_min = []
+    lista1_min = []
+    lista2_min = []
+    lista3_min = []
+    lista4_min = []
 
     for mini in range (n):
-        minimo = min(lista)
-        lista_min.append(minimo)
-        lista.remove(minimo)
-    return lista_min    
+        minimo = min(lista2)
+        lista2_min.append(minimo)
+        for i in range (len(matriz)):
+            if minimo in matriz[i] and minimo in matriz[i][2]:
+                lista0_min.append(matriz[i][2])
+        lista2.remove(minimo)
+
+    return lista0_min, lista2_min
 
 def graficar(lista1,lista2):
     xs = [i for i,_ in enumerate(lista1)]
@@ -157,7 +206,6 @@ def graficar(lista1,lista2):
     plt.savefig('grafico_barras.png')
     plt.show()
     
-
 def main():
     #escribe tu código abajo de esta línea
     ejecutar = input('''Seleccione una opción: 
@@ -189,9 +237,13 @@ def main():
         mostrar_datos(matriz_max2,matriz_min2,n,definicion2,simbolo2,palabra2,palabras2)
 
     elif ejecutar == '3':
-        paises = matrices_listas[2]
-        vacuna_comple = matrices_listas[3]
-        graficar(paises,vacuna_comple)
+        matriz_grafica = matrices_listas[0]
+        grafica_min = minimo_graficar(n, matriz_grafica)
+        grafica_max = maximo_graficar(n, matriz_grafica)
+        paises = grafica_min[0] + grafica_max[0]
+        vacuna_completa = grafica_min[1] + grafica_max[1]
+        graficar(paises, vacuna_completa)
+        
     else:
         print('Entrada inválida')
     
