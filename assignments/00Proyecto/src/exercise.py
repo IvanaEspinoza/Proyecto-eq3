@@ -144,7 +144,19 @@ def minimo(n,matriz):
         lista.remove(minimo)
     return lista_min    
 
-# def graficar(lista1,lista2):
+def graficar(lista1,lista2):
+    xs = [i for i,_ in enumerate(lista1)]
+
+    plt.bar(xs, lista2)
+
+    plt.ylabel('% Población vacunada por completo')
+    plt.title("Porcentaje de vacunación completa por países")
+
+    plt.xticks([i for i,_ in enumerate(lista1)], lista1)
+
+    plt.savefig('grafico_barras.png')
+    plt.show()
+    
 
 def main():
     #escribe tu código abajo de esta línea
