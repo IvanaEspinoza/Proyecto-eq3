@@ -135,17 +135,7 @@ def minimo(n,matriz):
     matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
     return matriz_min
 
-def maximo_lista(lista,n):
-    
-    lista_max = []
 
-    for maxi in range (n):
-        maximo = max(lista)
-        lista_max.append(maximo)
-        lista.remove(maximo)
-    return lista_max
-
-def minimo_lista(lista,n):
     lista_min = []
 
     for mini in range (n):
@@ -153,6 +143,7 @@ def minimo_lista(lista,n):
         lista_min.append(minimo)
         lista.remove(minimo)
     return lista_min    
+
 # def graficar(lista1,lista2):
 
 def main():
