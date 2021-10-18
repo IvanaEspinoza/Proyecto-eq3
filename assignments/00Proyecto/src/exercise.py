@@ -3,7 +3,7 @@ def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
     for i in range (n):
         print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]} {simbolo} y un GDP de {matriz_max[i][4]}.
         Otros datos: La {definicion} {palabra} es {matriz_max[i][2]} {simbolo}. 
-        Por lo tanto {matriz_max[i][3]} {palabras}''')
+        Por lo tanto, podemos decir: {matriz_max[i][3]} {palabras}''')
 
     print(f'Ordenados en forma ascendente los {n} países con la menor {definicion}:')
     for i in range (n):
@@ -12,17 +12,19 @@ def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
         Por lo tanto {matriz_min[i][3]} {palabras}''')
 
 def manipular_datos1(lista1,lista2):
-    dias = []
-    for i in range (len(lista1)):
-        dato_dias = str(int(lista1[i]) / int(lista2[i]))
-        dias.append(dato_dias)
-    return dias
+    poblacion = []
+    for i in range (1,len(lista1)):
+        dato_poblacion = str((100*float(lista1[i])) / float(lista2[i]))
+        poblacion.append(dato_poblacion)
+    poblacion.insert(0, 'Total population')
+    return poblacion
 
 def manipular_datos2(lista1,lista2):
-    vacuna_no_comple=[]
-    for i in range (len(lista1)):
-        no_completo=str(int(lista1[i])-int(lista2[i]))
+    vacuna_no_comple = []
+    for i in range (1,len(lista1)):
+        no_completo = str(float(lista1[i]) - float(lista2[i]))
         vacuna_no_comple.append(no_completo)
+    vacuna_no_comple.insert(0, '% population not fully vaccinated')
     return vacuna_no_comple
 
 def formar_matriz(lista1,lista2,lista3,lista4,lista5):
@@ -34,20 +36,20 @@ def formar_matriz(lista1,lista2,lista3,lista4,lista5):
 
 def leer_datos():
     paises=[]
-    num_vacunas=[]
+    num_vacuna_porcienpersonas=[]
+    num_vacuna=[]
     porcen_vacuna=[]
     porcen_vacuna_comple=[]
-    num_vacuna_día=[]
-
-    with open('/workspace/Proyecto-eq3/assignments/Global_COVID_Vaccination_Tracker.csv', 'r') as f:  
+    
+    with open('/workspace/Proyecto-eq3/assignments/Worldwide_Vaccine_Data.csv', 'r') as f:  
         for line in f:
             lista_line = line.split(",")
 
             paises.append(lista_line[0])
-            num_vacuna.append(lista_line[1])
+            num_vacuna_porcienpersonas.append(lista_line[1])
+            num_vacuna.append(lista_line[2])
             porcen_vacuna.append(lista_line[3])
             porcen_vacuna_comple.append(lista_line[4])
-            num_vacunas_día.append(lista_line[5])
 
     gdp_imf=[]
 
@@ -55,12 +57,12 @@ def leer_datos():
         for line in f:
             lista_line_gdp = line.split(",")
             gdp_imf.append(lista_line_gdp[3])
-        
-    dias = manipular_datos1(num_vacunas,num_vacuna_día)
+
+    poblacion = manipular_datos1(num_vacuna, num_vacuna_porcienpersonas)
     vacuna_no_comple = manipular_datos2(porcen_vacuna,porcen_vacuna_comple)
 
     matriz_informe1 = formar_matriz(paises,porcen_vacuna,porcen_vacuna_comple,vacuna_no_comple,gdp_imf) 
-    matriz_informe2 = formar_matriz(paises,num_vacunas,num_vacuna_día,dias,gdp_imf)
+    matriz_informe2 = formar_matriz(paises,num_vacuna,num_vacuna_porcienpersonas,poblacion,gdp_imf)
 
     return matriz_informe1, matriz_informe2
 
@@ -232,8 +234,8 @@ def main():
         matriz_min2 = minimo(n,matriz_informe2)
         definicion2 = 'cantidad de vacunas administradas'
         simbolo2 = 'dosis'
-        palabra2 = 'por día'
-        palabras2 = 'días tomó administrar tal cantidad de vacunas.'
+        palabra2 = 'por cada 100 personas'
+        palabras2 = 'personas se tomaron en cuneta para el cálculo.'
         mostrar_datos(matriz_max2,matriz_min2,n,definicion2,simbolo2,palabra2,palabras2)
 
     elif ejecutar == '3':
@@ -243,7 +245,7 @@ def main():
         paises = grafica_min[0] + grafica_max[0]
         vacuna_completa = grafica_min[1] + grafica_max[1]
         graficar(paises, vacuna_completa)
-        
+
     else:
         print('Entrada inválida')
     
