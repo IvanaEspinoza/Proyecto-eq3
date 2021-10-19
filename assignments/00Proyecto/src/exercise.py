@@ -4,7 +4,7 @@ def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
     print(f'Ordenados en forma descendente los {n} países con la mayor {definicion}:')
     for i in range (n):
         print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]} {simbolo} y un GDP estimado en USD per capita como per IMF {matriz_max[i][4]}.
-        Otros datos: La {definicion} {palabra} es {matriz_max[i][2]} {simbolo} . 
+        Otros datos: La {definicion} {palabra} es {matriz_max[i][2]} {simbolo}. 
         Por lo tanto, podemos decir: {matriz_max[i][3]} {palabras}
         ''')
     print(' ')
@@ -272,7 +272,7 @@ def main():
         definicion2 = 'cantidad de vacunas administradas'
         simbolo2 = 'dosis'
         palabra2 = 'por cada 100 personas'
-        palabras2 = 'personas se tomaron en cuneta para el cálculo.'
+        palabras2 = 'personas se tomaron en cuenta para el cálculo.'
         mostrar_datos(matriz_max2,matriz_min2,n,definicion2,simbolo2,palabra2,palabras2)
 
     elif ejecutar == '3':
