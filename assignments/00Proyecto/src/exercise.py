@@ -29,6 +29,13 @@ def manipular_datos2(lista1,lista2):
     vacuna_no_comple.insert(0, '% population not fully vaccinated')
     return vacuna_no_comple
 
+def formar_matriz6(lista1,lista2,lista3,lista4,lista5,lista6):
+    matriz = []
+    for i in range (len(lista1)):
+        lista_pais = [lista1[i], lista2[i], lista3[i], lista4[i], lista5[i],lista6[i]]
+        matriz.append(lista_pais)
+    return matriz
+
 def formar_matriz(lista1,lista2,lista3,lista4,lista5):
     matriz = []
     for i in range (len(lista1)):
@@ -43,7 +50,7 @@ def leer_datos():
     porcen_vacuna=[]
     porcen_vacuna_comple=[]
     
-    with open('/workspace/Proyecto-eq3/assignments/00Proyecto/scr/Worldwide_Vaccine_Data.csv', 'r') as f:  
+    with open('/workspace/Proyecto-eq3/assignments/00Proyecto/src/Worldwide_Vaccine_Data.csv', 'r') as f:  
         for line in f:
             lista_line = line.split(",")
 
@@ -53,18 +60,21 @@ def leer_datos():
             porcen_vacuna.append(lista_line[3])
             porcen_vacuna_comple.append(lista_line[4])
 
-    gdp_imf=[]
+    paises_gdp = []
+    gdp_imf = []
 
     with open('/workspace/Proyecto-eq3/assignments/00Proyecto/src/GDP_PerCapita.csv', 'r') as f:  
         for line in f:
             lista_line_gdp = line.split(",")
+
+            paises_gdp.append(lista_line_gdp[0])
             gdp_imf.append(lista_line_gdp[3])
 
     poblacion = manipular_datos1(num_vacuna, num_vacuna_porcienpersonas)
     vacuna_no_comple = manipular_datos2(porcen_vacuna,porcen_vacuna_comple)
 
-    matriz_informe1 = formar_matriz(paises,porcen_vacuna,porcen_vacuna_comple,vacuna_no_comple,gdp_imf) 
-    matriz_informe2 = formar_matriz(paises,num_vacuna,num_vacuna_porcienpersonas,poblacion,gdp_imf)
+    matriz_informe1 = formar_matriz6(paises,porcen_vacuna,porcen_vacuna_comple,vacuna_no_comple,gdp_imf,paises_gdp) 
+    matriz_informe2 = formar_matriz6(paises,num_vacuna,num_vacuna_porcienpersonas,poblacion,gdp_imf,paises_gdp)
 
     return matriz_informe1, matriz_informe2
 
@@ -79,18 +89,21 @@ def maximo(n,matriz):
     lista2 = []
     lista3 = []
     lista4 = []
+    lista5 = []
 
     desglose(matriz,lista0,0)
     desglose(matriz,lista1,1)
     desglose(matriz,lista2,2)
     desglose(matriz,lista3,3)
     desglose(matriz,lista4,4)
+    desglose(matriz,lista5,5)
     
     lista0_max = []
     lista1_max = []
     lista2_max = []
     lista3_max = []
     lista4_max = []
+    lista5_max = []
 
     for maxi in range (n):
         maximo = max(lista1[1:])
@@ -100,8 +113,11 @@ def maximo(n,matriz):
                 lista0_max.append(matriz[i][0])
                 lista2_max.append(matriz[i][2])
                 lista3_max.append(matriz[i][3])
-                lista4_max.append(matriz[i][4])
                 break
+            for idos in range (len(matriz)):
+                if matriz[i][0] in matriz[idos][5]:
+                    lista4_max.append(matriz[idos][4])
+                    break
         lista1.remove(maximo)
 
     matriz_max = formar_matriz(lista0_max,lista1_max,lista2_max,lista3_max,lista4_max)
@@ -113,18 +129,21 @@ def minimo(n,matriz):
     lista2 = []
     lista3 = []
     lista4 = []
+    lista5 = []
 
     desglose(matriz,lista0,0)
     desglose(matriz,lista1,1)
     desglose(matriz,lista2,2)
     desglose(matriz,lista3,3)
     desglose(matriz,lista4,4)
+    desglose(matriz,lista5,5)
     
     lista0_min = []
     lista1_min = []
     lista2_min = []
     lista3_min = []
     lista4_min = []
+    lista5_min = []
 
     for mini in range (n):
         minimo = min(lista1[1:])
@@ -134,8 +153,11 @@ def minimo(n,matriz):
                 lista0_min.append(matriz[i][0])
                 lista2_min.append(matriz[i][2])
                 lista3_min.append(matriz[i][3])
-                lista4_min.append(matriz[i][4])
                 break
+            for idos in range (len(matriz)):
+                if matriz[i][0] in matriz[idos][5]:
+                    lista4_min.append(matriz[idos][4])
+                    break
         lista1.remove(minimo)
 
     matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
@@ -147,6 +169,7 @@ def maximo_graficar(n,matriz):
     lista2 = []
     lista3 = []
     lista4 = []
+    lista5 = []
 
     desglose(matriz,lista0,0)
     desglose(matriz,lista1,1)
@@ -159,6 +182,7 @@ def maximo_graficar(n,matriz):
     lista2_max = []
     lista3_max = []
     lista4_max = []
+    lista5_max = []
 
     for maxi in range (n):
         maximo = max(lista2)
@@ -176,18 +200,21 @@ def minimo_graficar(n,matriz):
     lista2 = []
     lista3 = []
     lista4 = []
+    lista5 = []
 
     desglose(matriz,lista0,0)
     desglose(matriz,lista1,1)
     desglose(matriz,lista2,2)
     desglose(matriz,lista3,3)
     desglose(matriz,lista4,4)
+    desglose(matriz,lista5,5)
     
     lista0_min = []
     lista1_min = []
     lista2_min = []
     lista3_min = []
     lista4_min = []
+    lista5_min = []
 
     for mini in range (n):
         minimo = min(lista2)
@@ -195,6 +222,7 @@ def minimo_graficar(n,matriz):
         for i in range (len(matriz)):
             if minimo in matriz[i] and minimo in matriz[i][2]:
                 lista0_min.append(matriz[i][2])
+                break
         lista2.remove(minimo)
 
     return lista0_min, lista2_min
