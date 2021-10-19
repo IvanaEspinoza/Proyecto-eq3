@@ -3,17 +3,17 @@ from matplotlib import pyplot as plt
 def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
     print(f'Ordenados en forma descendente los {n} países con la mayor {definicion}:')
     for i in range (n):
-        print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]} {simbolo} y un GDP estimado en USD per 
-        capita como per IMF {matriz_max[i][4]}.
-        Otros datos: La {definicion} {palabra} es {matriz_max[i][2]}{simbolo}. 
-        Por lo tanto, podemos decir: {matriz_max[i][3]} {palabras}''')
+        print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]}{simbolo} y un GDP estimado en USD per capita como per IMF {matriz_max[i][4]}.
+        Otros datos: La {definicion} {palabra} es {matriz_max[i][2]}{simbolo} . 
+        Por lo tanto, podemos decir: {matriz_max[i][3]} {palabras}
+        ''')
     print(' ')
     print(f'Ordenados en forma ascendente los {n} países con la menor {definicion}:')
     for i in range (n):
-        print(f'''{i+1}. {matriz_min[i][0]} con {matriz_min[i][1]} {simbolo} y un GDP estimado en USD per 
-        capita como per IMF {matriz_min[i][4]}.
+        print(f'''{i+1}. {matriz_min[i][0]} con {matriz_min[i][1]}{simbolo} y un GDP estimado en USD per capita como per IMF {matriz_min[i][4]}.
         Otros datos: La {definicion} {palabra} es {matriz_min[i][2]}{simbolo}. 
-        Por lo tanto {matriz_min[i][3]} {palabras}''')
+        Por lo tanto {matriz_min[i][3]} {palabras}
+        ''')
 
 def manipular_datos1(lista1,lista2):
     poblacion = []
@@ -116,11 +116,11 @@ def maximo(n,matriz):
                 lista2_max.append(matriz[i][2])
                 lista3_max.append(matriz[i][3])
                 break
-            for idos in range (len(matriz)):
+            for idos in range (1,len(matriz)):
                 if matriz[i][0] in matriz[idos][5]:
                     lista4_max.append(matriz[idos][4])
                 else:
-                    lista4_max.append('No contamos con ese dato')
+                    lista4_max.append('\'No contamos con ese dato\'')
         lista1.remove(maximo)
 
     matriz_max = formar_matriz(lista0_max,lista1_max,lista2_max,lista3_max,lista4_max)
@@ -157,11 +157,11 @@ def minimo(n,matriz):
                 lista2_min.append(matriz[i][2])
                 lista3_min.append(matriz[i][3])
                 break
-            for idos in range (len(matriz)):
+            for idos in range (1,len(matriz)):
                 if matriz[i][0] in matriz[idos][5]:
                     lista4_min.append(matriz[idos][4])
                 else:
-                    lista4_min.append('No contamos con ese dato')
+                    lista4_min.append('\'No contamos con ese dato\'')
         lista1.remove(minimo)
 
     matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
@@ -189,7 +189,7 @@ def maximo_graficar(n,matriz):
     lista5_max = []
 
     for maxi in range (n):
-        maximo = max(lista2)
+        maximo = max(lista2[1:])
         lista2_max.append(maximo)
         for i in range (len(matriz)):
             if maximo in matriz[i] and maximo in matriz[i][2]:
@@ -222,11 +222,11 @@ def minimo_graficar(n,matriz):
     lista5_min = []
 
     for mini in range (n):
-        minimo = min(lista2)
+        minimo = min(lista2[1:])
         lista2_min.append(minimo)
         for i in range (len(matriz)):
             if minimo in matriz[i] and minimo in matriz[i][2]:
-                lista0_min.append(matriz[i][2])
+                lista0_min.append(matriz[i][0])
                 break
         lista2.remove(minimo)
 
