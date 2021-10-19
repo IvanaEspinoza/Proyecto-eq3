@@ -1,3 +1,5 @@
+from matplotlib import pyplot as plt
+
 def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
     print(f'Ordenados en forma descendente los {n} países con la mayor {definicion}:')
     for i in range (n):
@@ -5,7 +7,7 @@ def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
         capita como per IMF {matriz_max[i][4]}.
         Otros datos: La {definicion} {palabra} es {matriz_max[i][2]}{simbolo}. 
         Por lo tanto, podemos decir: {matriz_max[i][3]} {palabras}''')
-
+    print(' ')
     print(f'Ordenados en forma ascendente los {n} países con la menor {definicion}:')
     for i in range (n):
         print(f'''{i+1}. {matriz_min[i][0]} con {matriz_min[i][1]} {simbolo} y un GDP estimado en USD per 
@@ -117,7 +119,8 @@ def maximo(n,matriz):
             for idos in range (len(matriz)):
                 if matriz[i][0] in matriz[idos][5]:
                     lista4_max.append(matriz[idos][4])
-                    break
+                else:
+                    lista4_max.append('No contamos con ese dato')
         lista1.remove(maximo)
 
     matriz_max = formar_matriz(lista0_max,lista1_max,lista2_max,lista3_max,lista4_max)
@@ -157,7 +160,8 @@ def minimo(n,matriz):
             for idos in range (len(matriz)):
                 if matriz[i][0] in matriz[idos][5]:
                     lista4_min.append(matriz[idos][4])
-                    break
+                else:
+                    lista4_min.append('No contamos con ese dato')
         lista1.remove(minimo)
 
     matriz_min = formar_matriz(lista0_min,lista1_min,lista2_min,lista3_min,lista4_min)
@@ -190,6 +194,7 @@ def maximo_graficar(n,matriz):
         for i in range (len(matriz)):
             if maximo in matriz[i] and maximo in matriz[i][2]:
                 lista0_max.append(matriz[i][0])
+                break
         lista2.remove(maximo)
 
     return lista0_max, lista2_max
