@@ -1,13 +1,15 @@
 def mostrar_datos(matriz_max,matriz_min,n,definicion,simbolo,palabra,palabras):
     print(f'Ordenados en forma descendente los {n} países con la mayor {definicion}:')
     for i in range (n):
-        print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]} {simbolo} y un GDP de {matriz_max[i][4]}.
+        print(f'''{i+1}. {matriz_max[i][0]} con {matriz_max[i][1]} {simbolo} y un GDP estimado en USD per 
+        capita como per IMF {matriz_max[i][4]}.
         Otros datos: La {definicion} {palabra} es {matriz_max[i][2]}{simbolo}. 
         Por lo tanto, podemos decir: {matriz_max[i][3]} {palabras}''')
 
     print(f'Ordenados en forma ascendente los {n} países con la menor {definicion}:')
     for i in range (n):
-        print(f'''{i+1}. {matriz_min[i][0]} con {matriz_min[i][1]} {simbolo} y un GDP de {matriz_min[i][4]}.
+        print(f'''{i+1}. {matriz_min[i][0]} con {matriz_min[i][1]} {simbolo} y un GDP estimado en USD per 
+        capita como per IMF {matriz_min[i][4]}.
         Otros datos: La {definicion} {palabra} es {matriz_min[i][2]}{simbolo}. 
         Por lo tanto {matriz_min[i][3]} {palabras}''')
 
@@ -41,7 +43,7 @@ def leer_datos():
     porcen_vacuna=[]
     porcen_vacuna_comple=[]
     
-    with open('/workspace/Proyecto-eq3/assignments/Worldwide_Vaccine_Data.csv', 'r') as f:  
+    with open('/workspace/Proyecto-eq3/assignments/00Proyecto/scr/Worldwide_Vaccine_Data.csv', 'r') as f:  
         for line in f:
             lista_line = line.split(",")
 
@@ -53,7 +55,7 @@ def leer_datos():
 
     gdp_imf=[]
 
-    with open('/workspace/Proyecto-eq3/assignments/GDP_PerCapita.csv', 'r') as f:  
+    with open('/workspace/Proyecto-eq3/assignments/00Proyecto/src/GDP_PerCapita.csv', 'r') as f:  
         for line in f:
             lista_line_gdp = line.split(",")
             gdp_imf.append(lista_line_gdp[3])
