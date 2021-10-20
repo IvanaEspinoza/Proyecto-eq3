@@ -252,39 +252,41 @@ def main():
     2. Países que administraron la mayor y menor cantidad de vacunas.
     3. Gráfico de comparación entre los países con mayor y menor población vacunada por completo.
     Su opción es: ''')
-    numero = int(input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)? '))
-    matrices_listas = leer_datos()
-    print(' ')
-    if ejecutar == '1':
-        matriz_informe1 = matrices_listas[0]
-        matriz_max1 = maximo(numero,matriz_informe1)
-        matriz_min1 = minimo(numero,matriz_informe1)
-        definicion1 = 'poblacion vacunada'
-        simbolo1 = '%'
-        palabra1 = 'por completo'
-        palabras1 = '% no se le han administrado todas las dosis.'
-        mostrar_datos(matriz_max1,matriz_min1,numero,definicion1,simbolo1,palabra1,palabras1)
-
-    elif ejecutar == '2':
-        matriz_informe2 = matrices_listas[1]        
-        matriz_max2 = maximo(numero,matriz_informe2)
-        matriz_min2 = minimo(numero,matriz_informe2)
-        definicion2 = 'cantidad de vacunas administradas'
-        simbolo2 = 'dosis'
-        palabra2 = 'por cada 100 personas'
-        palabras2 = 'personas se tomaron en cuenta para el cálculo.'
-        mostrar_datos(matriz_max2,matriz_min2,numero,definicion2,simbolo2,palabra2,palabras2)
-
-    elif ejecutar == '3':
-        matriz_grafica = matrices_listas[0]
-        grafica_min = minimo_graficar(numero, matriz_grafica)
-        grafica_max = maximo_graficar(numero, matriz_grafica)
-        paises = grafica_min[0] + grafica_max[0]
-        vacuna_completa = grafica_min[1] + grafica_max[1]
-        graficar(paises, vacuna_completa)
-
+    if ejecutar!= '1' and ejecutar!= '2' and ejecutar!= '3':
+        print('Entrada invalida')
     else:
-        print('Entrada inválida')
+        numero = int(input('¿Cuántos países quiere ver (El número mencionado será igual para ambas categorías)? '))
+        matrices_listas = leer_datos()
+        print(' ')
+        if ejecutar == '1':
+            matriz_informe1 = matrices_listas[0]
+            matriz_max1 = maximo(numero,matriz_informe1)
+            matriz_min1 = minimo(numero,matriz_informe1)
+            definicion1 = 'poblacion vacunada'
+            simbolo1 = '%'
+            palabra1 = 'por completo'
+            palabras1 = '% no se le han administrado todas las dosis.'
+            mostrar_datos(matriz_max1,matriz_min1,numero,definicion1,simbolo1,palabra1,palabras1)
+
+        elif ejecutar == '2':
+            matriz_informe2 = matrices_listas[1]        
+            matriz_max2 = maximo(numero,matriz_informe2)
+            matriz_min2 = minimo(numero,matriz_informe2)
+            definicion2 = 'cantidad de vacunas administradas'
+            simbolo2 = 'dosis'
+            palabra2 = 'por cada 100 personas'
+            palabras2 = 'personas se tomaron en cuenta para el cálculo.'
+            mostrar_datos(matriz_max2,matriz_min2,numero,definicion2,simbolo2,palabra2,palabras2)
+
+        elif ejecutar == '3':
+            matriz_grafica = matrices_listas[0]
+            grafica_min = minimo_graficar(numero, matriz_grafica)
+            grafica_max = maximo_graficar(numero, matriz_grafica)
+            paises = grafica_min[0] + grafica_max[0]
+            vacuna_completa = grafica_min[1] + grafica_max[1]
+            graficar(paises, vacuna_completa)
+
+        
     
 if __name__=='__main__':
     main()
