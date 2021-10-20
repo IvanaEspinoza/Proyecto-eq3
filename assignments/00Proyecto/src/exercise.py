@@ -285,8 +285,6 @@ def main():
             paises = grafica_min[0] + grafica_max[0]
             vacuna_completa = grafica_min[1] + grafica_max[1]
             graficar(paises, vacuna_completa)
-
-        
     
 if __name__=='__main__':
     main()
